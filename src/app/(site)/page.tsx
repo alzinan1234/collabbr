@@ -10,7 +10,7 @@ import ReviewDiaries from "@/components/Collabbbr/home/ReviewDiaries";
 
 export default function Home() {
   return (
-    <div className=" bg-white">
+    <div className=" bg-[#F8FAFC]">
        <HeroSection />
        <HowItWorks />
        <AnalyticsSection />

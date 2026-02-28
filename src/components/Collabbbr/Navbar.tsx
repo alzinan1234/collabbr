@@ -7,6 +7,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 const navLinks = [
   { name: 'Home', href: '/', hasDropdown: false },
   { name: 'Badges', href: '/badges', hasDropdown: false },
+  { name: 'About Us', href: '/about', hasDropdown: false },
   { name: 'Pricing', href: '/pricing', hasDropdown: false },
 ];
 
@@ -15,7 +16,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
         <div className="flex justify-between items-center h-20">
           
           {/* Logo Section */}
