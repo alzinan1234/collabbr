@@ -91,7 +91,7 @@ const AboutUs: React.FC = () => {
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
                     <div className="flex-1">
                         <img 
-                            src={visionImage} 
+                            src={visionImage}  
                             alt="Team collaborating with laptops" 
                             className="w-full h-auto object-cover rounded-xl"
                         />

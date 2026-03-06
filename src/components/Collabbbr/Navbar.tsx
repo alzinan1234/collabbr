@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import Link from 'next/link'; // Next.js Link ইমপোর্ট করা হয়েছে
+import Link from 'next/link';
+import { usePathname } from 'next/navigation'; // পাথ চেক করার জন্য ইমপোর্ট করা হয়েছে
 import { ChevronDown, Menu, X } from 'lucide-react';
 
 // নেভিগেশন আইটেমগুলোর অবজেক্ট
@@ -8,11 +9,12 @@ const navLinks = [
   { name: 'Home', href: '/', hasDropdown: false },
   { name: 'Badges', href: '/badges', hasDropdown: false },
   { name: 'About Us', href: '/about', hasDropdown: false },
-  { name: 'Pricing', href: '/pricing', hasDropdown: false },
+  { name: 'Pricing', href: '/price', hasDropdown: false },
 ];
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname(); // বর্তমান ইউআরএল পাথ জানার জন্য
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
@@ -21,21 +23,30 @@ const Navbar: React.FC = () => {
           
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-2 cursor-pointer">
-            <img src="/collabbr-logo.png" alt="Collabbr Logo" className="" />
+            <img src="/collabbr-logo.png" alt="Collabbr Logo" className="max-w-[160px] md:max-w-[210px]" />
           </Link>
 
           {/* Desktop Navigation - Mapping Objects */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                href={link.href}
-                className="flex items-center gap-1 text-[#374151] font-medium hover:text-[#5D5FEF] transition-colors"
-              >
-                {link.name}
-                {link.hasDropdown && <ChevronDown size={16} />}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              // চেক করা হচ্ছে এই লিঙ্কটি অ্যাক্টিভ কি না
+              const isActive = pathname === link.href;
+
+              return (
+                <Link 
+                  key={link.name} 
+                  href={link.href}
+                  className={`flex items-center gap-1 font-medium transition-colors ${
+                    isActive 
+                      ? 'text-[#5D5FEF]' // অ্যাক্টিভ হলে এই কালার হবে
+                      : 'text-[#374151] hover:text-[#5D5FEF]' // নরমাল কালার
+                  }`}
+                >
+                  {link.name}
+                  {link.hasDropdown && <ChevronDown size={16} />}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right Side Buttons */}
@@ -67,17 +78,23 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu Overlay - Mapping Objects */}
       <div className={`md:hidden bg-white border-t transition-all duration-300 ease-in-out overflow-hidden ${isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="px-4 pt-4 pb-6 space-y-4 shadow-lg">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex justify-between items-center py-2 text-gray-700 font-medium border-b border-gray-50"
-            >
-              {link.name}
-              {link.hasDropdown && <ChevronDown size={18} />}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`flex justify-between items-center py-2 font-medium border-b border-gray-50 ${
+                  isActive ? 'text-[#5D5FEF]' : 'text-gray-700'
+                }`}
+              >
+                {link.name}
+                {link.hasDropdown && <ChevronDown size={18} />}
+              </Link>
+            );
+          })}
           
           <div className="flex flex-col gap-3 pt-4">
             <Link href="/signin" onClick={() => setIsMobileMenuOpen(false)}>
