@@ -122,7 +122,7 @@ export default function Analytics() {
 
   return (
     <div className='bg-[#ffffff]  pt-20'>
-        <div className="p-6 md:p-10 max-w-7xl mx-auto  min-h-screen font-sans text-[#2D3748]">
+        <div className="p-6 md:p-10 max-w-[1440px] mx-auto  min-h-screen font-sans text-[#2D3748]">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-[32px] font-bold text-[#1A202C] mb-6">Analytics</h1>

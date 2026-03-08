@@ -50,7 +50,7 @@ const AboutUs: React.FC = () => {
         <div className="bg-white min-h-screen">
             {/* Header / Banner - Using the background color of the first block from image */}
             <header className="bg-indigo-50 py-24 px-6 md:px-12 pt-30 md:pt-34 md:pb-20 font-sans">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+                <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center gap-12">
                     <div className="flex-1 text-left">
                         <h1 className="text-4xl font-bold text-gray-950 mb-6">About Us</h1>
                         <p className="text-lg text-gray-700 leading-relaxed max-w-2xl">

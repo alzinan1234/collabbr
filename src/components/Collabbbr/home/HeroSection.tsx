@@ -30,7 +30,7 @@ const HeroSection = () => {
           backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2070&auto=format&fit=crop')` 
         }}
       >
-        <div className="max-w-7xl mx-auto w-full">
+        <div className="max-w-[1440px] mx-auto w-full">
           <div className="max-w-2xl text-white">
             <h1 className="text-4xl md:text-[48px] font-bold mb-4 leading-tight">
               Connect. Collaborate. Grow.

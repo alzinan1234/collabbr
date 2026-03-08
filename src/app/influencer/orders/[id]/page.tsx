@@ -17,7 +17,7 @@ const OrderDetails = () => {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] p-4 md:p-8 lg:p-10 font-sans">
-      <div className="max-w-7xl mx-auto pt-4 md:pt-20">
+      <div className="max-w-[1440px] mx-auto pt-4 md:pt-20">
         
         {/* Navigation & Header - Responsive Flex */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">

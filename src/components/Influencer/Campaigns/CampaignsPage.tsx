@@ -164,7 +164,7 @@ const CampaignsPage: React.FC = () => {
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         
         {/* --- Category Section (Mouse Drag Enabled) --- */}
         <div className="border-b border-gray-100 overflow-hidden">

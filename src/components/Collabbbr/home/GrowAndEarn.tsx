@@ -5,7 +5,7 @@ const GrowAndEarn: React.FC = () => {
   return (
     <section className="py-16 px-4 md:px-8 lg:px-12">
       {/* Main Container with Light Cream/Yellow Background */}
-      <div className="max-w-7xl mx-auto bg-[#FFF8E7] rounded-[16px] overflow-hidden p-8 md:p-9 flex flex-col lg:flex-row items-center gap-12">
+      <div className="max-w-[1440px] mx-auto bg-[#FFF8E7] rounded-[16px] overflow-hidden p-8 md:p-9 flex flex-col lg:flex-row items-center gap-12">
         
         {/* Left Side: Dashboard Preview Image */}
         <div className="flex-1 w-full max-w-[550px] order-2 lg:order-1">

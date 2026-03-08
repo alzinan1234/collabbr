@@ -48,7 +48,7 @@ const VerifiedBadges: React.FC = () => {
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-20">
+      <div className="max-w-[1440px] mx-auto px-4 py-20">
         {/* Badge Levels Title */}
         <h3 className="text-2xl md:text-3xl font-bold text-[#1a1f36] text-center mb-16">
           Badge Levels

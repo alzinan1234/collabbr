@@ -30,7 +30,7 @@ const OrdersTable = () => {
 
   return (
     <div className='bg-white min-h-screen'>
-      <div className="max-w-7xl mx-auto pt-10 py-10 px-4">
+      <div className="max-w-[1440px] mx-auto pt-10 py-10 px-4">
         {/* Header */}
         <h2 className="text-[28px] font-bold text-[#1e293b] mb-8">Orders</h2>
 

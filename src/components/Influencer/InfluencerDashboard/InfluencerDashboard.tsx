@@ -44,7 +44,7 @@ const InfluencerDashboard = () => {
 
   return (
     <div className="bg-[#F9FAFB] min-h-screen p-8 text-[#4B5563] font-sans pt-38">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
+      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row gap-8">
         
         {/* LEFT COLUMN */}
         <div className="w-full md:w-[320px] space-y-6">

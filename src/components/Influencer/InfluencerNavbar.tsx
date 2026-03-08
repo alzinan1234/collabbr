@@ -51,7 +51,7 @@ const InfluencerNavbar: React.FC = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white z-50 border-b border-gray-100 font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           
           {/* Logo */}
@@ -190,14 +190,14 @@ const InfluencerNavbar: React.FC = () => {
 
                   <div className="py-1 border-b border-gray-100">
                     <ProfileItem href="/influencer/analytics" icon={<BarChart3 size={18} />} label="Analytics" onClick={() => setIsProfileOpen(false)} />
-                    <ProfileItem href="/influencer/subscription" icon={<BadgeCheck size={18} />} label="Subscription" onClick={() => setIsProfileOpen(false)} />
+                    <ProfileItem href="/influencer/influencer-subscription" icon={<BadgeCheck size={18} />} label="Subscription" onClick={() => setIsProfileOpen(false)} />
                     <ProfileItem href="/influencer/reviews" icon={<Star size={18} />} label="My reviews" onClick={() => setIsProfileOpen(false)} />
                     <ProfileItem href="/influencer/saved" icon={<Heart size={18} />} label="Saved Lists" onClick={() => setIsProfileOpen(false)} />
                   </div>
 
                   <div className="py-1 border-b border-gray-100">
                     <ProfileItem href="/influencer/earnings" icon={<Wallet size={18} />} label="Earnings & Withdrawals" onClick={() => setIsProfileOpen(false)} />
-                    <ProfileItem href="/influencer/billing" icon={<CreditCard size={18} />} label="Payment & Billing" onClick={() => setIsProfileOpen(false)} />
+                    <ProfileItem href="/influencer/payment-billing" icon={<CreditCard size={18} />} label="Payment & Billing" onClick={() => setIsProfileOpen(false)} />
                     <ProfileItem href="/influencer/settings" icon={<Settings size={18} />} label="Account Settings" onClick={() => setIsProfileOpen(false)} />
                   </div>
 
