@@ -136,7 +136,7 @@ function EmptyState() {
         <circle cx="142" cy="50" r="8" fill="#C4C6E7" />
         <path d="M128 74c0-7.7 6.3-14 14-14s14 6.3 14 14" fill="#E8E9F5" />
         {/* Leaves */}
-        <ellipse cx="28" cy="108" rx="12" ry="6" rx2="6" fill="#5D5FEF" opacity="0.15" transform="rotate(-30 28 108)" />
+        <ellipse cx="28" cy="108" rx="12" ry="6" fill="#5D5FEF" opacity="0.15" transform="rotate(-30 28 108)" />
         <ellipse cx="152" cy="96" rx="10" ry="5" fill="#5D5FEF" opacity="0.12" transform="rotate(20 152 96)" />
         {/* Dots on right bubble */}
         <circle cx="89" cy="79" r="2" fill="#9EA0D6" />
