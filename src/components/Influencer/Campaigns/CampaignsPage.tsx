@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, Suspense } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Search, ChevronDown, Heart } from 'lucide-react';
 import Link from 'next/link';
@@ -39,7 +39,7 @@ const mockCampaigns: Campaign[] = Array(12).fill(null).map((_, index) => ({
   appliedCount: 34,
   budget: 100,
   niche: index < 8 ? 'Beauty & Fashion' : 'Travel & Adventure',
-  imageUrl: `https://picsum.photos/seed/${index + 40}/600/400`, 
+  imageUrl: `https://picsum.photos/seed/${index + 40}/600/400`,
   userAvatars: [
     'https://i.pravatar.cc/150?u=1',
     'https://i.pravatar.cc/150?u=2',
@@ -55,24 +55,24 @@ const CampaignCard: React.FC<{ campaign: Campaign }> = ({ campaign }) => {
     <Link href={`/influencer/campaigns/${campaign.id}`}>
       <div className="bg-white rounded-[16px] sm:rounded-[24px] border border-gray-100 overflow-hidden hover:shadow-xl hover:shadow-indigo-50/50 transition-all duration-500 group cursor-pointer h-full">
         <div className="relative aspect-[16/11] overflow-hidden">
-          <img 
-            src={campaign.imageUrl} 
-            alt={campaign.title} 
+          <img
+            src={campaign.imageUrl}
+            alt={campaign.title}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <button 
-            onClick={(e) => { e.preventDefault(); /* Like logic here */ }}
+          <button
+            onClick={(e) => { e.preventDefault(); }}
             className="absolute top-2 right-2 sm:top-4 sm:right-4 p-1.5 sm:p-2.5 bg-white/80 backdrop-blur-md rounded-full text-gray-400 hover:text-red-500 hover:bg-white transition-all shadow-sm z-10"
           >
             <Heart size={16} className="sm:w-[18px] sm:h-[18px]" />
           </button>
         </div>
-        
+
         <div className="p-3 sm:p-5 space-y-2 sm:space-y-3">
           <h3 className="font-semibold text-[14px] sm:text-[17px] text-[#1e293b] group-hover:text-[#5D5FEF] transition-colors line-clamp-1">
             {campaign.title}
           </h3>
-          
+
           <div className="flex flex-col sm:flex-row justify-between sm:items-center text-[11px] sm:text-[13px] text-gray-500 font-medium gap-1">
             <span>{campaign.startDate} - {campaign.endDate}</span>
             <span className="text-[#5D5FEF] flex items-center gap-1">
@@ -100,27 +100,31 @@ const CampaignCard: React.FC<{ campaign: Campaign }> = ({ campaign }) => {
   );
 };
 
-// --- Main Page Component ---
-const CampaignsPage: React.FC = () => {
+const NoResults = () => (
+  <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-gray-200">
+    <p className="text-gray-500 font-medium text-sm sm:text-base">No campaigns found.</p>
+  </div>
+);
+
+// --- Inner component that uses useSearchParams (must be inside Suspense) ---
+const CampaignsContent: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const sortRef = useRef<HTMLDivElement>(null);
 
-  // Mouse drag scroll state
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
   const currentCategory = searchParams.get('category') || categories[0];
   const currentSearch = searchParams.get('search') || '';
   const currentSort = searchParams.get('sort') || sortOptions[0];
 
   const [searchInput, setSearchInput] = useState(currentSearch);
-  const [isSortOpen, setIsSortOpen] = useState(false);
-  const sortRef = useRef<HTMLDivElement>(null);
 
-  // --- Mouse Drag Scroll Logic ---
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
     setIsDragging(true);
@@ -135,7 +139,7 @@ const CampaignsPage: React.FC = () => {
     if (!isDragging || !scrollRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2; 
+    const walk = (x - startX) * 2;
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
@@ -152,7 +156,7 @@ const CampaignsPage: React.FC = () => {
     if (!isDragging) updateParams({ category });
   };
 
-  const allFiltered = mockCampaigns.filter(c => 
+  const allFiltered = mockCampaigns.filter(c =>
     (currentCategory === categories[0] || c.niche === currentCategory) &&
     (!currentSearch || c.title.toLowerCase().includes(currentSearch.toLowerCase()))
   );
@@ -165,10 +169,10 @@ const CampaignsPage: React.FC = () => {
       `}</style>
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
-        
-        {/* --- Category Section (Mouse Drag Enabled) --- */}
+
+        {/* Category Section */}
         <div className="border-b border-gray-100 overflow-hidden">
-          <div 
+          <div
             ref={scrollRef}
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
@@ -177,12 +181,12 @@ const CampaignsPage: React.FC = () => {
             className={`flex items-center gap-6 sm:gap-8 overflow-x-auto no-scrollbar py-1 cursor-grab ${isDragging ? 'cursor-grabbing' : ''}`}
           >
             {categories.map((category) => (
-              <button 
+              <button
                 key={category}
                 onClick={() => handleCategoryClick(category)}
                 className={`pb-4 text-[13px] sm:text-[14px] font-medium whitespace-nowrap border-b-2 transition-all duration-300 ${
-                  category === currentCategory 
-                    ? 'text-[#5D5FEF] border-[#5D5FEF]' 
+                  category === currentCategory
+                    ? 'text-[#5D5FEF] border-[#5D5FEF]'
                     : 'text-gray-400 border-transparent hover:text-gray-600'
                 }`}
               >
@@ -192,13 +196,16 @@ const CampaignsPage: React.FC = () => {
           </div>
         </div>
 
-        {/* --- Header & Search --- */}
+        {/* Header & Search */}
         <div className="space-y-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight">Campaigns</h1>
           <div className="flex flex-col md:flex-row gap-4">
-            <form onSubmit={(e) => { e.preventDefault(); updateParams({ search: searchInput }); }} className="relative flex-1">
+            <form
+              onSubmit={(e) => { e.preventDefault(); updateParams({ search: searchInput }); }}
+              className="relative flex-1"
+            >
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-              <input 
+              <input
                 type="text"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
@@ -208,7 +215,7 @@ const CampaignsPage: React.FC = () => {
             </form>
 
             <div className="relative" ref={sortRef}>
-              <button 
+              <button
                 onClick={() => setIsSortOpen(!isSortOpen)}
                 className="flex items-center justify-between w-full md:w-auto gap-3 px-5 py-3 bg-white border border-gray-100 rounded-xl text-[14px] font-medium text-gray-700"
               >
@@ -218,11 +225,11 @@ const CampaignsPage: React.FC = () => {
                 </div>
                 <ChevronDown size={16} className={`transition-transform duration-300 ${isSortOpen ? 'rotate-180' : ''}`} />
               </button>
-              
+
               {isSortOpen && (
                 <div className="absolute right-0 top-full mt-2 w-full md:w-52 bg-white rounded-xl shadow-2xl z-50 py-2 border border-gray-50 animate-in fade-in slide-in-from-top-2">
                   {sortOptions.map(option => (
-                    <button 
+                    <button
                       key={option}
                       onClick={() => { updateParams({ sort: option }); setIsSortOpen(false); }}
                       className={`w-full text-left px-5 py-2 text-[14px] ${option === currentSort ? 'text-[#5D5FEF] bg-indigo-50/50 font-semibold' : 'text-gray-600 hover:bg-gray-50'}`}
@@ -236,7 +243,7 @@ const CampaignsPage: React.FC = () => {
           </div>
         </div>
 
-        {/* --- Campaign Sections (Responsive Grid) --- */}
+        {/* Campaign Sections */}
         {[
           { title: "Based on Your Niche", data: allFiltered.slice(0, 8) },
           { title: "Campaigns you may like", data: allFiltered.slice(8, 12) }
@@ -261,10 +268,17 @@ const CampaignsPage: React.FC = () => {
   );
 };
 
-const NoResults = () => (
-  <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-gray-200">
-    <p className="text-gray-500 font-medium text-sm sm:text-base">No campaigns found.</p>
-  </div>
-);
+// --- Main export wrapped in Suspense ---
+const CampaignsPage: React.FC = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#FCFCFD] flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-[#5D5FEF] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <CampaignsContent />
+    </Suspense>
+  );
+};
 
 export default CampaignsPage;
