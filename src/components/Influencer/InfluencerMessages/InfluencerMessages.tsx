@@ -205,8 +205,8 @@ const InfluencerMessages: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-8">
+    <div className=" bg-white font-sans pb-20">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-8 pt-30">
 
         {/* Page Title */}
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Chat Inbox</h1>
