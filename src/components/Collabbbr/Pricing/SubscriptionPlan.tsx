@@ -44,7 +44,7 @@ const SubscriptionPlan = () => {
 
   return (
     <section className="py-20 bg-white px-4 pt-38">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1440px] px-4 sm:px-6 lg:px-8  mx-auto">
         <h2 className="text-3xl font-bold text-[#2D3142] mb-12">Subscription Plan</h2>
 
         {/* Plan Cards */}

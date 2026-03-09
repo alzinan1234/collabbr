@@ -66,7 +66,7 @@ const HeroSection = () => {
 
       {/* Floating Feature Cards Section */}
       <div className="relative -mt-20 md:-mt-24 z-10 px-4 sm:px-6 lg:px-8 pb-10">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1440px] mx-auto">
           <div 
             className="bg-white rounded-2xl grid grid-cols-1 md:grid-cols-3 gap-8 p-8 md:p-12 text-center"
             style={{ 

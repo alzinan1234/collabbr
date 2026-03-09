@@ -76,9 +76,11 @@ const InfluencerNavbar: React.FC = () => {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3 md:gap-6">
-            <button className="text-gray-500 hover:text-[#5D5FEF] transition-colors">
+               <Link href="/influencer/messages">
+            <button className="p-2 text-gray-600 hover:text-[#5D5FEF] transition-colors">
               <MessageSquareMore size={24} strokeWidth={1.5} />
             </button>
+          </Link>
             
             {/* Notification Section */}
             <div className="relative" ref={notificationRef}>

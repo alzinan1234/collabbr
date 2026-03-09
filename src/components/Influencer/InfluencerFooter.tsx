@@ -70,7 +70,7 @@ const socialLinks = [
 
 const InfluencerFooter: React.FC = () => {
   return (
-    <footer className="bg-white border-t border-gray-100 pt-30 pb-12">
+    <footer className="bg-white border-t border-gray-100 pt-10 pb-10">
       <div className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8">
         
         {/* Grid Layout: ৫টি কলাম */}
